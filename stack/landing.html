@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nuxtbase Local Environment</title>
+
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+  <style>
+    .container-app {
+      max-width: 600px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="container-app mx-auto mt-10">
+
+    <h1 class="text-xl font-bold">nuxtbase Local Environment</h1>
+
+    <h2 class="mt-6 mb-2 font-semibold">Available Services</h2>
+    <ul class="list-disc ml-6">
+      <li class="mb-2">
+        <a class="underline font-medium hover:text-red-600" href="//localhost:8001/_/" target="_blank">Pocketbase (8001)</a>
+        <p class="text-gray-500 text-sm">
+          Pocketbase CMS.
+        </p>
+      </li>
+      <li class="mb-2">
+        <a class="underline font-medium hover:text-red-600" href="//localhost:8002" target="_blank">Nuxt (8002)</a>
+        <p class="text-gray-500 text-sm">
+          NUXT frontend website.
+        </p>
+      </li>
+    </ul>
+
+  </section>
+
+  <script>
+    window.addEventListener('load', evt => {
+      // Fixes localhost with ip in case of addressing as IP.
+      document.querySelectorAll('a').forEach(el => {
+        el.href = el.href.replace('localhost', window.location.hostname);
+      });
+    });
+  </script>
+
+</body>
+
+</html>

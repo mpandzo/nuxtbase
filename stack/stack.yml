@@ -1,0 +1,41 @@
+version: "3.8"
+
+networks:
+  default:
+    name: nuxtbase
+
+services:
+
+  landing:
+    container_name: nuxtbase-landing
+    privileged: true
+    image: nginx:alpine
+    volumes:
+      - ./landing.html:/usr/share/nginx/html/index.html
+    ports:
+      - 8000:80
+
+  pocketbase:
+    container_name: nuxtbase-pocketbase
+    privileged: true
+    build:
+      context: ../pocketbase
+      dockerfile: Dockerfile
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    ports:
+      - 8001:8001
+
+  nuxt:
+    container_name: nuxtbase-nuxt
+    command: npm run dev
+    build:
+      context: ../nuxt
+      dockerfile: Dockerfile
+    volumes:
+      - ../nuxt:/home/node/app
+      - ../nuxt/node_modules:/home/node/app/node_modules/
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    ports:
+      - '8002:8002'
