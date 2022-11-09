@@ -5,22 +5,28 @@ FROM node:16.18-alpine
 RUN apk update && apk upgrade
 RUN apk add git
 
-# Expose the port 3000
 EXPOSE 8002
 
 ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=8002
-
-# Set the default command to run when a container starts
-CMD [ "yarn", "dev" ]
+ENV NITRO_HOST=0.0.0.0
+ENV NITRO_PORT=8002
+ENV HOST=0.0.0.0
+ENV PORT=8002
+ENV WATCHPACK_POLLING=true
 
 # create destination directory
-RUN mkdir -p /home/node/app
-WORKDIR /home/node/app
-RUN chown -R node:node /home/node/app
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+RUN chown -R node:node /usr/src/app
 
 # Copy files
-COPY . /home/node/app
+COPY . /usr/src/app
 
 # Install app dependencies
 RUN yarn
+
+RUN yarn global add nodemon
+
+# Set the default command to run when a container starts
+CMD [ "yarn", "dev" ]
