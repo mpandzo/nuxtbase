@@ -4,4 +4,4 @@ default:
 dev:
 	docker-compose -f stack/stack.yml -p nuxtbase up \
 		--no-deps --build --remove-orphans --force-recreate \
-		pocketbase nuxt landing
+		pocketbase frontend landing

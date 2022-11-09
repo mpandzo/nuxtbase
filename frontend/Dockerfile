@@ -19,8 +19,8 @@ RUN mkdir -p /home/node/app
 WORKDIR /home/node/app
 RUN chown -R node:node /home/node/app
 
-# Install app dependencies
-COPY package.json /home/node/app
-RUN yarn
-
+# Copy files
 COPY . /home/node/app
+
+# Install app dependencies
+RUN yarn

@@ -26,15 +26,15 @@ services:
     ports:
       - 8001:8001
 
-  nuxt:
+  frontend:
     container_name: nuxtbase-nuxt
     command: npm run dev
     build:
-      context: ../nuxt
+      context: ../frontend
       dockerfile: Dockerfile
     volumes:
-      - ../nuxt:/home/node/app
-      - ../nuxt/node_modules:/home/node/app/node_modules/
+      - ../frontend:/home/node/app
+      - ../frontend/node_modules:/home/node/app/node_modules/
     extra_hosts:
       - host.docker.internal:host-gateway
     ports:
