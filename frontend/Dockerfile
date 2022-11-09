@@ -1,11 +1,15 @@
 # Dockerfile
-FROM node:16.18-alpine
+FROM node:18-alpine
 
 # update and install dependency
 RUN apk update && apk upgrade
-RUN apk add git
 
 EXPOSE 8002
+EXPOSE 24679
+
+ENV PATH=./node_modules/.bin/:$PATH
+
+RUN apk add --no-cache bash
 
 ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=8002
@@ -16,17 +20,15 @@ ENV PORT=8002
 ENV WATCHPACK_POLLING=true
 
 # create destination directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-RUN chown -R node:node /usr/src/app
+RUN mkdir -p /usr/src/xyz
+WORKDIR /usr/src/xyz
+# RUN chown -R node:node /usr/src/xyz
 
 # Copy files
-COPY . /usr/src/app
+COPY . /usr/src/xyz
 
-# Install app dependencies
+# Install xyz dependencies
 RUN yarn
-
-RUN yarn global add nodemon
 
 # Set the default command to run when a container starts
 CMD [ "yarn", "dev" ]
