@@ -42,8 +42,4 @@ services:
     ports:
       - '8002:8002'
       - '24679:24679'
-    networks:
-      - nuxt-network
-networks:
-  nuxt-network:
-    driver: bridge     
+    
